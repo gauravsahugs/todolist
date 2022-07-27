@@ -1,0 +1,39 @@
+.app{
+  background-color: rgb(250, 248, 246);
+  align-items: center;
+  margin: auto;
+  padding: 100px;
+  padding-top: 30px;
+}
+
+.app_body{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+  box-shadow: 1px;
+  margin: auto;
+  padding: 20px;}
+
+  .header{
+   padding-left: 220px;
+   padding-right: 220px;
+   padding-bottom:10px ;
+    align-items: center;
+  }
+
+  .input_message{
+    border: 0.5px solid lightgray ;
+    border-radius: 5px;
+    margin: 5px;
+
+  }
+
+  .add_todo{
+    border: 0.5px solid lightgray ;
+    border-radius: 5px;
+  }
+
+  .add_todo:hover{
+    color: aquamarine;
+  }
+
