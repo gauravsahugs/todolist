@@ -4,10 +4,10 @@ import "./App.css";
 function App() {
   const [message, setMessage] = useState("");
   const [dueDate, setDueDate] = useState("");
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState([{}]);
 
-  const addTodo = function () {
-    setTodoList([...todoList, message]);
+  const addTodo = () => {
+    setTodoList([...todoList, { message, dueDate }]);
 
     setMessage("");
   };
@@ -20,6 +20,9 @@ function App() {
   const handleChangeDate = (e) => {
     e.preventDefault();
     setDueDate(e.target.value);
+  };
+  const handleClear = () => {
+    setTodoList([]);
   };
 
   const handleClick = (e) => {
@@ -35,8 +38,8 @@ function App() {
 
   const date = new Date();
   const timestamp =
-    date.getDate() + "-" + (date.getMonth() + 1) + "-" + date.getFullYear();
-  console.log(timestamp);
+    date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+
   return (
     <div className="app">
       <div className="app_body">
@@ -50,17 +53,15 @@ function App() {
               placeholder="Add your task here"
               value={message}
             />
-            <input
-              type="date"
-              onChange={handleChangeDate}
-              value={dueDate}
-              placeholder="MM-DD-YYYY"
-            />
+            <input type="date" onChange={handleChangeDate} value={dueDate} />
             Task Completion date
             <button className="add_todo" onClick={addTodo}>
               Add Todo
             </button>
           </div>
+          <button className="clearbtn" onClick={handleClear}>
+            Empty List
+          </button>
         </div>
         <div className="listitem">
           {todoList.map((todo) => {
@@ -71,11 +72,12 @@ function App() {
                   onClick={handleClick}
                   onDoubleClick={handleDoubleClick}
                 >
-                  {todo}
+                  {todo.message}
                 </li>
+
                 <div className="timestamp">
-                  <>Task pinned on: {timestamp} </>
-                  <>Finish task by:{dueDate}</>
+                  Task pinned on: {timestamp}
+                  Finish task by:{todo.dueDate}
                 </div>
               </div>
             );
