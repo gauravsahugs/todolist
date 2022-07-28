@@ -2,25 +2,23 @@ import { useState } from "react";
 import "./App.css";
 
 function App() {
-  const [message, setMessage] = useState("");
-  const [dueDate, setDueDate] = useState("");
-  const [todoList, setTodoList] = useState([{}]);
-
+  const [todoList, setTodoList] = useState([]);
   const addTodo = () => {
-    setTodoList([...todoList, { message, dueDate }]);
+    const inputfieldElement = document.getElementById("input_message");
+    const inputfieldDateElement = document.getElementById("input_message_date");
+    setTodoList([
+      ...todoList,
+      {
+        message: inputfieldElement?.value,
+        dueDate: inputfieldDateElement?.value,
+      },
+    ]);
 
-    setMessage("");
+    inputfieldElement.value = "";
+    inputfieldDateElement.value = "";
   };
+  console.log(todoList);
 
-  const handleChange = (e) => {
-    e.preventDefault();
-    setMessage(e.target.value);
-  };
-
-  const handleChangeDate = (e) => {
-    e.preventDefault();
-    setDueDate(e.target.value);
-  };
   const handleClear = () => {
     setTodoList([]);
   };
@@ -47,13 +45,12 @@ function App() {
           <h1>Todo-List </h1>
           <div className="inputfield">
             <input
+              id="input_message"
               className="input_message"
               type="text"
-              onChange={handleChange}
               placeholder="Add your task here"
-              value={message}
             />
-            <input type="date" onChange={handleChangeDate} value={dueDate} />
+            <input id="input_message_date" type="date" />
             Task Completion date
             <button className="add_todo" onClick={addTodo}>
               Add Todo
@@ -64,9 +61,9 @@ function App() {
           </button>
         </div>
         <div className="listitem">
-          {todoList.map((todo) => {
+          {todoList.map((todo, i) => {
             return (
-              <div>
+              <div key={todo?.message}>
                 <li
                   className="todolistitem"
                   onClick={handleClick}
