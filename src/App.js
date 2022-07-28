@@ -7,6 +7,8 @@ function App() {
 
   const addTodo = function () {
     setTodoList([...todoList, message]);
+
+    setMessage("");
   };
 
   const handleChange = (e) => {
