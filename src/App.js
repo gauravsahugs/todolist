@@ -3,21 +3,29 @@ import "./App.css";
 
 function App() {
   const [todoList, setTodoList] = useState([]);
+
   const addTodo = () => {
     const inputfieldElement = document.getElementById("input_message");
     const inputfieldDateElement = document.getElementById("input_message_date");
-    setTodoList([
-      ...todoList,
-      {
-        message: inputfieldElement?.value,
-        dueDate: inputfieldDateElement?.value,
-      },
-    ]);
+    if (
+      inputfieldElement?.value !== "" &&
+      inputfieldDateElement?.value !== ""
+    ) {
+      setTodoList([
+        ...todoList,
+        {
+          message: inputfieldElement?.value,
+          dueDate: inputfieldDateElement?.value,
+        },
+      ]);
 
-    inputfieldElement.value = "";
-    inputfieldDateElement.value = "";
+      inputfieldElement.value = "";
+      inputfieldElement.placeholder = "Add your task here";
+      inputfieldDateElement.value = "";
+    } else {
+      inputfieldElement.placeholder = "Task field cannot be empty.";
+    }
   };
-  console.log(todoList);
 
   const handleClear = () => {
     setTodoList([]);
@@ -73,8 +81,14 @@ function App() {
                 </li>
 
                 <div className="timestamp">
-                  Task pinned on: {timestamp}
-                  Finish task by:{todo.dueDate}
+                  <div>
+                    <p> Task pinned on: </p>
+                    <p>{timestamp}</p>
+                  </div>
+                  <div>
+                    <p>Finish task by:</p>
+                    <p>{todo.dueDate}</p>
+                  </div>
                 </div>
               </div>
             );

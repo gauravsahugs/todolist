@@ -69,11 +69,16 @@ justify-content: space-evenly;
 
 .timestamp{
   display:flex;
-  flex-direction: column;
-  justify-content:space-around;
-
+  flex-direction: row;
+  justify-content:space-evenly;
+  padding: 0;
+  margin: 0;
 }
 
+.timestamp > div > p {
+  padding: 0;
+  margin: 0;
+}
 .clearbtn{
   border-radius: 5px;
         border: 0.5px solid #D5D8DC  ;
